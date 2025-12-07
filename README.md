@@ -2,27 +2,37 @@
 
 A Discord bot that aggregates payment industry news from RSS feeds, uses AI to summarize and categorize articles, and delivers daily digests.
 
+**🚀 Status:** Deployed and running 24/7 on Railway
+**📦 Repository:** https://github.com/ratanon97/PaymentNewsDiscordBot
+
 ## Features
 
-- Fetches news from The Paypers and Finextra RSS feeds
-- AI-powered article summarization using Anthropic's Claude
+- Fetches news from Finextra Payments and Payments Dive RSS feeds
+- AI-powered article summarization using Anthropic's Claude (claude-3-5-sonnet-20240620)
 - Automatic categorization (Global vs Thailand-specific)
+- Discord embeds with rich formatting and emoji reactions
 - Daily scheduled digests at 8 AM Bangkok time
 - Manual commands for on-demand news
 - SQLite database to prevent duplicate articles
+- HTML tag stripping and URL cleaning
 
 ## Project Structure
 
 ```
 PaymentNewsBot/
-├── bot.py              # Discord bot logic and commands
-├── news_fetcher.py     # RSS fetching and AI processing
-├── database.py         # SQLite database operations
-├── scheduler.py        # Daily digest scheduling
-├── config.py           # Configuration management
-├── requirements.txt    # Python dependencies
-├── .env               # Environment variables (create this)
-└── .env.example       # Environment variables template
+├── bot.py                      # Discord bot logic and commands
+├── news_fetcher.py             # RSS fetching and AI processing
+├── database.py                 # SQLite database operations
+├── scheduler.py                # Daily digest scheduling
+├── config.py                   # Configuration management
+├── requirements.txt            # Python dependencies
+├── Procfile                    # Railway deployment configuration
+├── runtime.txt                 # Python version specification
+├── .env                        # Environment variables (create this)
+├── .env.example               # Environment variables template
+├── README.md                  # This file
+├── REQUIREMENTS.md            # Technical requirements document
+└── SECURITY_IMPROVEMENTS.md   # Security documentation
 ```
 
 ## Setup
@@ -94,26 +104,24 @@ python scheduler.py
 - `!digest` - Manually trigger a news digest (fetches new articles and displays them)
 - `!latest` - Show the last 5 articles from the database
 
-## Railway Deployment (24/7 Cloud Hosting)
+## Railway Deployment (24/7 Cloud Hosting) ✅
 
-To run your bot 24/7 in the cloud using Railway:
+**This bot is currently deployed and running on Railway!**
 
-### 1. Push to GitHub
+If you want to deploy your own instance:
+
+### 1. Fork or Clone Repository
 
 ```bash
-# Create a new repository on GitHub (via web interface)
-# Then connect your local repo:
-
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-git branch -M main
-git push -u origin main
+git clone https://github.com/ratanon97/PaymentNewsDiscordBot.git
+cd PaymentNewsDiscordBot
 ```
 
 ### 2. Deploy to Railway
 
-1. Go to [Railway](https://railway.app/) and sign up/login
+1. Go to [Railway](https://railway.app/) and sign up/login with GitHub
 2. Click "New Project" → "Deploy from GitHub repo"
-3. Select your PaymentNewsBot repository
+3. Select your forked/cloned PaymentNewsBot repository
 4. Railway will automatically detect your `Procfile` and `runtime.txt`
 
 ### 3. Configure Environment Variables
@@ -121,14 +129,14 @@ git push -u origin main
 In your Railway project dashboard:
 
 1. Go to "Variables" tab
-2. Add these environment variables:
+2. Add these three environment variables:
    - `DISCORD_TOKEN` = your_discord_bot_token
    - `DISCORD_CHANNEL_ID` = your_channel_id
    - `ANTHROPIC_API_KEY` = your_anthropic_api_key
 
-### 4. Deploy
+### 4. Automatic Deployment
 
-Railway will automatically deploy your bot. Check the deployment logs to ensure it started successfully.
+Railway will automatically deploy your bot after adding the environment variables. Check the deployment logs to ensure it started successfully.
 
 ### Important Notes for Railway
 
@@ -147,12 +155,21 @@ Railway offers:
 
 ## Configuration
 
-Edit `config.py` to customize:
+### RSS Feed Sources
 
-- RSS feed sources
+Currently configured feeds in `config.py`:
+- **Finextra Payments**: https://www.finextra.com/rss/channel.aspx?channel=payments
+- **Payments Dive**: https://www.paymentsdive.com/feeds/news/
+
+### Customizable Settings
+
+Edit `config.py` to customize:
+- RSS feed sources (add/remove feeds)
 - Digest time (default: 08:00 Bangkok time)
-- Number of articles shown in `!latest` command
+- Number of articles shown in `!latest` command (default: 5)
 - Command prefix (default: `!`)
+- Anthropic model (current: claude-3-5-sonnet-20240620)
+- API timeouts and retry logic
 
 ## Database
 

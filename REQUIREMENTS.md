@@ -3,8 +3,8 @@
 ## Document Information
 - **Project Name:** Payment News Discord Bot
 - **Version:** 1.0
-- **Last Updated:** December 6, 2025
-- **Status:** Active Development
+- **Last Updated:** December 7, 2025
+- **Status:** Production - Deployed on Railway
 
 ---
 
@@ -100,7 +100,7 @@ The system shall use feedparser version 6.0.10 or higher to parse RSS/Atom feeds
 
 **TR-006: AI Integration**
 The system shall integrate with Anthropic's Claude API using the anthropic SDK version 0.18.0 or higher with the following specifications:
-- Model: claude-3-5-sonnet-20241022
+- Model: claude-3-5-sonnet-20240620
 - Max tokens per request: 300
 - Request timeout: 30 seconds
 - Retry logic: 3 attempts with exponential backoff

@@ -94,6 +94,57 @@ python scheduler.py
 - `!digest` - Manually trigger a news digest (fetches new articles and displays them)
 - `!latest` - Show the last 5 articles from the database
 
+## Railway Deployment (24/7 Cloud Hosting)
+
+To run your bot 24/7 in the cloud using Railway:
+
+### 1. Push to GitHub
+
+```bash
+# Create a new repository on GitHub (via web interface)
+# Then connect your local repo:
+
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+git branch -M main
+git push -u origin main
+```
+
+### 2. Deploy to Railway
+
+1. Go to [Railway](https://railway.app/) and sign up/login
+2. Click "New Project" → "Deploy from GitHub repo"
+3. Select your PaymentNewsBot repository
+4. Railway will automatically detect your `Procfile` and `runtime.txt`
+
+### 3. Configure Environment Variables
+
+In your Railway project dashboard:
+
+1. Go to "Variables" tab
+2. Add these environment variables:
+   - `DISCORD_TOKEN` = your_discord_bot_token
+   - `DISCORD_CHANNEL_ID` = your_channel_id
+   - `ANTHROPIC_API_KEY` = your_anthropic_api_key
+
+### 4. Deploy
+
+Railway will automatically deploy your bot. Check the deployment logs to ensure it started successfully.
+
+### Important Notes for Railway
+
+- Railway uses the `Procfile` to know how to run your app
+- The bot runs as a "worker" process (not a web server)
+- The database file will persist across deployments
+- Check logs via Railway dashboard if you encounter issues
+- The bot will restart automatically if it crashes
+
+### Railway Costs
+
+Railway offers:
+- $5 free credit per month (sufficient for a small Discord bot)
+- Pay-as-you-go pricing after free credits
+- This bot typically uses minimal resources (~$5-10/month)
+
 ## Configuration
 
 Edit `config.py` to customize:

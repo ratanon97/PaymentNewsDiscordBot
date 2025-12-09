@@ -24,8 +24,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# TR-032: Load environment variables from .env file
-load_dotenv()
+# TR-032: Load environment variables from .env file (if it exists)
+# In production (Railway), environment variables are set directly by the platform
+load_dotenv(override=False)  # Don't override existing env vars
 
 
 class ConfigurationError(Exception):

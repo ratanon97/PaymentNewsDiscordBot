@@ -171,7 +171,7 @@ API_MAX_RETRIES = 3  # TR-006: Retry logic
 API_RETRY_DELAY = 1  # seconds, will use exponential backoff
 
 # TR-006: AI Integration Configuration
-ANTHROPIC_MODEL = 'claude-3-5-sonnet-20240620'  # Updated to valid model version
+ANTHROPIC_MODEL = 'claude-3-5-sonnet-20241022'  # Latest stable version
 ANTHROPIC_MAX_TOKENS = 300
 
 # TR-023: Discord Message Length Limit
